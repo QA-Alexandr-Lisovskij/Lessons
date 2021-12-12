@@ -56,8 +56,8 @@ public class EUHCalcTest {
         calculate.click();
         String actualFloorCablePower = driver.findElement(By.id("floor_cable_power")).getAttribute("value");
         String actualSpecFloorCablePower = driver.findElement(By.id("spec_floor_cable_power")).getAttribute("value");
-        Assert.assertEquals(actualFloorCablePower, expectedFloorCablePower, "FloorCablePower различные");
-        Assert.assertEquals(actualSpecFloorCablePower, expectedSpecFloorCablePower, "SpecFloorCablePower различные");
+        Assert.assertEquals(actualFloorCablePower, expectedFloorCablePower);
+        Assert.assertEquals(actualSpecFloorCablePower, expectedSpecFloorCablePower);
 
         System.out.println("The EUHCalculator test is completed");
     }
