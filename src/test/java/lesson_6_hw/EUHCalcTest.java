@@ -1,17 +1,17 @@
-package lesson_6;
-
+package lesson_6_hw;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-public class LamCalcTest {
+public class EUHCalcTest {
     public ChromeDriver driver;
 
 
@@ -28,23 +28,14 @@ public class LamCalcTest {
     @Test
     public void checkEUHCalc() {
         //Описание переменных
-        String roomWidth = "6";
-        String roomHeight = "3";
-        String lamWidth = "1300";
-        String lamHeight = "192";
-        String inPack = "12";
-        String price = "500";
-        String bias = "300";
-        String wallDist = "10";
-        String expectedSLam = "17.82 м2.";
-        String expectedCount = "76 шт.";
-        String expectedPacks = "7 шт.";
-        String expectedPrice = "10483 руб.";
-        String expectedOver = "8 шт.";
-        String expectedTrash = "4 шт.";
+        String weightValue = "24";
+        String lengthValue = "37";
+        String heatLossValue = "280";
+        String expectedFloorCablePower = "294";
+        String expectedSpecFloorCablePower = "0";
 
         //Открытие страницы
-        driver.get("https://masterskayapola.ru/kalkulyator/laminata.html");
+        driver.get("https://kermi-fko.ru/raschety/Calc-Rehau-Solelec.aspx");
 
         //Описание элементов страницы
         WebElement weight = driver.findElement(By.id("el_f_width"));
@@ -57,16 +48,18 @@ public class LamCalcTest {
         WebElement calculate = driver.findElement(By.cssSelector("input[type = 'button']"));
 
         //Выполнение теста
-
+        weight.sendKeys(weightValue);
+        length.sendKeys(lengthValue);
         typeRoom.selectByIndex(1);
         typHeating.selectByIndex(1);
-
+        heatLoss.sendKeys(heatLossValue);
         calculate.click();
         String actualFloorCablePower = driver.findElement(By.id("floor_cable_power")).getAttribute("value");
         String actualSpecFloorCablePower = driver.findElement(By.id("spec_floor_cable_power")).getAttribute("value");
+        Assert.assertEquals(actualFloorCablePower, expectedFloorCablePower, "FloorCablePower различные");
+        Assert.assertEquals(actualSpecFloorCablePower, expectedSpecFloorCablePower, "SpecFloorCablePower различные");
 
-
-        System.out.println("The Calculator test is completed");
+        System.out.println("The EUHCalculator test is completed");
     }
 
     @AfterTest(alwaysRun = true)
@@ -75,4 +68,3 @@ public class LamCalcTest {
         System.out.println("Smoke Tests close");
     }
 }
- 
