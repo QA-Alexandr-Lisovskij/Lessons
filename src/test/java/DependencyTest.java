@@ -1,3 +1,4 @@
+import data.StaticProvider;
 import org.testng.annotations.Test;
 
 public class DependencyTest {
@@ -10,8 +11,10 @@ public class DependencyTest {
     public void cbatest(){
         System.out.println("DependencyTest -> cbatest");
     }
-    @Test
-    public void bactest(){
-        System.out.println("DependencyTest -> bactest");
+    @Test(dataProvider = "dataForSum",dataProviderClass = StaticProvider.class)
+    public void bactest(int a,int b,int expectedResult){
+        System.out.println(a);
+        System.out.println(b);
+        System.out.println(expectedResult);
     }
 }
