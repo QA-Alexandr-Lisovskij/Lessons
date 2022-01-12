@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import pagebars.HeaderBar;
 
 public class AdministrationPage extends HeaderBar {
+    private static String ENDPOINT = "/dashboard";
     private final By prjsRequiredProject = By.xpath("//a[contains(text(),"+ ReadProperties.getProjectName()+")]");
     public AdministrationPage(WebDriver driver) {
         super(driver);
@@ -14,5 +15,10 @@ public class AdministrationPage extends HeaderBar {
 
     public WebElement getPrjsRequiredProject() {
         return driver.findElement(prjsRequiredProject);
+    }
+
+    @Override
+    protected void openPage() {
+        driver.get(BASE_URL + ENDPOINT);
     }
 }

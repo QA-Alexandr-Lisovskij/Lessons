@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import pagebars.HeaderBar;
 
 public class AddProjectPage extends HeaderBar {
+    private static String ENDPOINT = "/dashboard";
     private final By PAGE_OPENED_IDENTIFIER = By.id("accept");
     private final By projectsSettings = By.id("projects-tabs-project");
     private final By prjNameField = By.id("name");
@@ -65,6 +66,11 @@ public class AddProjectPage extends HeaderBar {
 
     public WebElement getCancelBtn() {
         return driver.findElement(cancelBtn);
+    }
+
+    @Override
+    protected void openPage() {
+        driver.get(BASE_URL + ENDPOINT);
     }
 
     public void add_project(){

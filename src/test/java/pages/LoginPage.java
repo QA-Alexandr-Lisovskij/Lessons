@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class LoginPage extends BasePage {
-
+    private static String ENDPOINT = "/auth/login";
     private final By PAGE_OPENED_IDENTIFIER = By.className("logo-loginpage");
     private final By emailfield = By.id("name");
     private final By passwordfield = By.id("password");
@@ -45,9 +45,15 @@ public class LoginPage extends BasePage {
         return super.isPageOpened(PAGE_OPENED_IDENTIFIER);
     }
 
-    public void login(String username, String paword) {
+    @Override
+    protected void openPage() {
+        driver.get(BASE_URL + ENDPOINT);
+    }
+
+    public void login(String username, String paword) throws InterruptedException {
         getEmailfield().sendKeys(ReadProperties.getUsername());
         getPasswordfield().sendKeys(ReadProperties.getPassword());
+        Thread.sleep(5000);
         getLoginbtn().click();
     }
 }

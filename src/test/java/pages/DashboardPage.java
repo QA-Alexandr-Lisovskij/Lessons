@@ -7,7 +7,7 @@ import pagebars.HeaderBar;
 
 
 public class DashboardPage extends HeaderBar {
-
+    private static String ENDPOINT = "/dashboard";
     private final By PAGE_OPENED_IDENTIFIER = By.xpath("//div[contains(text(),'All Projects')]");
     private final By addProjectBtn = By.id("navigation-empty-addproject");
     private final By addProjectBtnSidebar = By.id("sidebar-projects-add");
@@ -45,6 +45,11 @@ public class DashboardPage extends HeaderBar {
 
     public WebElement getNavigationProjectName() {
         return driver.findElement(navigationProjectName);
+    }
+
+    @Override
+    protected void openPage() {
+        driver.get(BASE_URL + ENDPOINT);
     }
 
 

@@ -33,6 +33,10 @@ public class HeaderBar extends BasePage {
         super(driver);
     }
 
+    @Override
+    protected void openPage() {
+    }
+
     public WebElement getBannerLink() {
         return driver.findElement(bannerLink);
     }
