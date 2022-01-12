@@ -1,7 +1,7 @@
 package tests;
 
 import baseEntities.BaseTest;
-import common.ReadProperties;
+import core.ReadProperties;
 import org.testng.annotations.Test;
 import pages.AddProjectPage;
 import pages.AdministrationPage;

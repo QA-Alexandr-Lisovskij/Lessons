@@ -1,6 +1,6 @@
 package pages;
 
-import common.ReadProperties;
+import core.ReadProperties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

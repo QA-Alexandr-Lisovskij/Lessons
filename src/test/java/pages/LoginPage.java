@@ -1,7 +1,7 @@
 package pages;
 
 import baseEntities.BasePage;
-import common.ReadProperties;
+import core.ReadProperties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -45,7 +45,7 @@ public class LoginPage extends BasePage {
         return super.isPageOpened(PAGE_OPENED_IDENTIFIER);
     }
 
-    public void login(String username, String paswword) {
+    public void login(String username, String paword) {
         getEmailfield().sendKeys(ReadProperties.getUsername());
         getPasswordfield().sendKeys(ReadProperties.getPassword());
         getLoginbtn().click();

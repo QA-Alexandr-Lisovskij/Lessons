@@ -1,7 +1,7 @@
 package baseEntities;
 
 
-import common.ReadProperties;
+import core.ReadProperties;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.github.bonigarcia.wdm.config.DriverManagerType;
 import org.openqa.selenium.WebDriver;
@@ -21,13 +21,13 @@ public class BaseTest {
 
     @BeforeMethod
     public void setUp() {
-        switch (ReadProperties.getBrowserType().toLowerCase()){
+        switch (ReadProperties.getBrowserName().toLowerCase()){
             case "chrome":
                 WebDriverManager.getInstance(DriverManagerType.CHROME).setup();
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("--disable-gpu");
                 chromeOptions.addArguments("--silent");
-                chromeOptions.setHeadless(ReadProperties.getHeadless());
+                chromeOptions.setHeadless(ReadProperties.isHeadless());
                 driver = new ChromeDriver(chromeOptions);
                 break;
             case  "firefox":
