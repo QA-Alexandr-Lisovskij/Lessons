@@ -1,7 +1,7 @@
 package pages;
 
 import baseEntities.BasePage;
-import core.ReadProperties;
+import models.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -55,10 +55,9 @@ public class LoginPage extends BasePage {
         driver.get(BASE_URL + ENDPOINT);
     }
 
-    public void login(String username, String paword) throws InterruptedException {
-        getEmailfield().sendKeys(ReadProperties.getUsername());
-        getPasswordfield().sendKeys(ReadProperties.getPassword());
-        Thread.sleep(5000);
+    public void login(User user) {
+        getEmailfield().sendKeys(user.getEmail());
+        getPasswordfield().sendKeys(user.getPassword());
         getLoginbtn().click();
     }
 }

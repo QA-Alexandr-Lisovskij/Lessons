@@ -2,7 +2,10 @@ package tests;
 
 import baseEntities.BaseTest;
 import core.ReadProperties;
+import models.User;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.DashboardPage;
 import pages.LoginPage;
 
 
@@ -11,26 +14,15 @@ public class SmokeTest extends BaseTest {
 
     @Test
     public void addProjectTest() throws InterruptedException {
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.isPageOpened();
-        loginPage.login(ReadProperties.getUsername(), ReadProperties.getPassword());
-//        DashboardPage dashboardPage = new DashboardPage(driver);
-//        dashboardPage.isPageOpened();
-//        dashboardPage.getAddProjectBtnSidebar().click();
-//        AddProjectPage addProjectPage = new AddProjectPage(driver);
-//        addProjectPage.isPageOpened();
-//        addProjectPage.add_project();
-//        AdministrationPage administrationPage = new AdministrationPage(driver);
-//        administrationPage.getPrjsRequiredProject();
-//
-    }
+        User user = new User()
+                .setEmail(ReadProperties.getUsername())
+                .setPassword(ReadProperties.getPassword());
 
-
-    @Test
-    public void retryLoginTest() throws InterruptedException {
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.isPageOpened();
-        loginPage.login(ReadProperties.getUsername(), ReadProperties.getPassword());
+        loginPage.login(user);
+
+        DashboardPage dashboardPage = new DashboardPage(driver);
+        Assert.assertTrue(dashboardPage.getAddProjectBtn().isDisplayed());
     }
 
 }
