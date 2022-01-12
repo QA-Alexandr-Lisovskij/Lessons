@@ -2,11 +2,11 @@ package baseEntities;
 
 
 import core.ReadProperties;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import utils.Waits;
 
 public abstract class BasePage {
+    protected static final int WAIT_FOR_PAGE_LOADED_IN_SECONDS = 3;
     protected WebDriver driver;
     protected Waits waits;
     protected String BASE_URL;
@@ -23,16 +23,25 @@ public abstract class BasePage {
         if (openPageByUrl) {
             openPage();
         }
+        waitForOpen();
     }
 
     protected abstract void openPage();
 
-    public boolean isPageOpened(By by) {
-        try {
-            return waits.waitForVisibility(by).isDisplayed();
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            return false;
+    public abstract boolean isPageOpened();
+
+    protected void waitForOpen() {
+        int tryCount = 0;
+        boolean isPageOpenedIndicator = isPageOpened();
+
+        while (!isPageOpenedIndicator
+                && tryCount < (WAIT_FOR_PAGE_LOADED_IN_SECONDS/ReadProperties.getTimeOut())) {
+            tryCount++;
+            isPageOpenedIndicator = isPageOpened();
+        }
+
+        if (!isPageOpenedIndicator) {
+            throw new AssertionError("Page was not opened");
         }
     }
 }

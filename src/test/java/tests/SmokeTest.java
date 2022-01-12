@@ -3,7 +3,6 @@ package tests;
 import baseEntities.BaseTest;
 import core.ReadProperties;
 import org.testng.annotations.Test;
-import pages.DashboardPage;
 import pages.LoginPage;
 
 
@@ -15,8 +14,7 @@ public class SmokeTest extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.isPageOpened();
         loginPage.login(ReadProperties.getUsername(), ReadProperties.getPassword());
-        DashboardPage dashboardPage = new DashboardPage(driver);
-
+//        DashboardPage dashboardPage = new DashboardPage(driver);
 //        dashboardPage.isPageOpened();
 //        dashboardPage.getAddProjectBtnSidebar().click();
 //        AddProjectPage addProjectPage = new AddProjectPage(driver);

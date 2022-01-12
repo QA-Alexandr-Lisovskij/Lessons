@@ -8,7 +8,7 @@ import pagebars.HeaderBar;
 
 public class AddProjectPage extends HeaderBar {
     private static String ENDPOINT = "/dashboard";
-    private final By PAGE_OPENED_IDENTIFIER = By.id("accept");
+    private static final By PAGE_OPENED_IDENTIFIER = By.id("accept");
     private final By projectsSettings = By.id("projects-tabs-project");
     private final By prjNameField = By.id("name");
     private final By prjAnnouncementField = By.id("announcement");
@@ -24,8 +24,19 @@ public class AddProjectPage extends HeaderBar {
         super(driver);
     }
 
+    @Override
+    protected void openPage() {
+        driver.get(BASE_URL + ENDPOINT);
+    }
+
+    @Override
     public boolean isPageOpened() {
-        return super.isPageOpened(PAGE_OPENED_IDENTIFIER);
+        try {
+            return waits.waitForVisibility(PAGE_OPENED_IDENTIFIER).isDisplayed();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return false;
+        }
     }
 
     public WebElement getProjectsSettings() {
@@ -68,10 +79,6 @@ public class AddProjectPage extends HeaderBar {
         return driver.findElement(cancelBtn);
     }
 
-    @Override
-    protected void openPage() {
-        driver.get(BASE_URL + ENDPOINT);
-    }
 
     public void add_project(){
         getPrjNameField().sendKeys(ReadProperties.getProjectName());

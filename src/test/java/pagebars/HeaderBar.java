@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class HeaderBar extends BasePage {
+    private static final By PAGE_OPENED_IDENTIFIER = By.id("bannerLink");
     private final By bannerLink = By.id("bannerLink");
     private final By dashboard = By.id("navigation-dashboard");
     private final By аdministration = By.id("navigation-admin");
@@ -35,6 +36,16 @@ public class HeaderBar extends BasePage {
 
     @Override
     protected void openPage() {
+    }
+
+    @Override
+    public boolean isPageOpened() {
+        try {
+            return waits.waitForVisibility(PAGE_OPENED_IDENTIFIER).isDisplayed();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return false;
+        }
     }
 
     public WebElement getBannerLink() {
