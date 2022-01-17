@@ -45,5 +45,4 @@ public class Project {
         this.showAnnouncement = showAnnouncement;
         return this;
     }
-
 }

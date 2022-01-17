@@ -22,7 +22,7 @@ public class AddProjectPage extends HeaderBar {
     private final By prjSuiteModeSingleBaselineCheckbox = By.id("suite_mode_single_baseline");
     private final By prjSuiteModeMultiCheckbox = By.id("suite_mode_multi");
     private final By accessSettings = By.id("projects-tabs-access");
-    private final By addProjectButton = By.id("accept");
+    private final By acceptButton = By.id("accept");
     private final By cancelButton = By.xpath("//a[contains(text(),'Cancel')][1]");
 
     public AddProjectPage(WebDriver driver) {
@@ -76,8 +76,8 @@ public class AddProjectPage extends HeaderBar {
         return driver.findElement(accessSettings);
     }
 
-    public WebElement AddProjectButton() {
-        return driver.findElement(addProjectButton);
+    public WebElement AcceptButton() {
+        return driver.findElement(acceptButton);
     }
 
     public WebElement CancelButton() {
@@ -117,7 +117,7 @@ public class AddProjectPage extends HeaderBar {
             case "suite_mode_multi" -> PrjSuiteModeMultiCheckbox().click();
             default -> throw new IllegalStateException("Unexpected value: " + project.getProjectType());
         }
-        AddProjectButton().click();
+        AcceptButton().click();
     }
 
 
