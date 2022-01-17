@@ -1,15 +1,16 @@
 package pages;
 
-import core.ReadProperties;
+import models.Project;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pagebars.HeaderBar;
 
 public class AdministrationPage extends HeaderBar {
+    Project project = new Project();
     private static final String ENDPOINT = "/admin/projects/overview";
-    private static final By PAGE_OPENED_IDENTIFIER = By.className("content-header-title page_title display-inline-block");
-    private final By nameProjectField = By.xpath("//a[contains(text()," + ReadProperties.getProjectName() + ")]");
+    private static final By PAGE_OPENED_IDENTIFIER = By.xpath("//*[@id=\"content-header\"]/div/div[2]");
+    private final By nameProjectField = By.xpath("//a[contains(text()," + project.getProjectName() + ")]");
     private final By deleteProjectButton = By.className("icon-small-delete");
     private final By editProjectButton = By.className("icon-small-edit");
     private final By deleteProjectCheckbox = By.name("deleteCheckbox");

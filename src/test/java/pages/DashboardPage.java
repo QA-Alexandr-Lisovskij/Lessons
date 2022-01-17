@@ -58,6 +58,11 @@ public class DashboardPage extends HeaderBar {
         return driver.findElement(navigationProjectName);
     }
 
+    public void addProject(){
+        AddProjectButtonSidebar().click();
+
+    }
+
 
 
 
