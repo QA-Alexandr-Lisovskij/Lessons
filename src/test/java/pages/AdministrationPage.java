@@ -14,7 +14,7 @@ public class AdministrationPage extends HeaderBar {
     private final By deleteProjectButton = By.className("icon-small-delete");
     private final By editProjectButton = By.className("icon-small-edit");
     private final By deleteProjectCheckbox = By.name("deleteCheckbox");
-    private final By deleteOkButton = By.className("button button-ok button-left button-positive dialog-action-default");
+    private final By deleteOkButton = By.xpath("//a[contains(text(),\" + project.getProjectName() + \")]//div");
 
     public AdministrationPage(WebDriver driver) {
         super(driver);
