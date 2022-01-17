@@ -11,6 +11,7 @@ public abstract class BasePage {
     protected Waits waits;
     protected String BASE_URL;
 
+
     public BasePage(WebDriver driver) {
         this(driver, false);
     }

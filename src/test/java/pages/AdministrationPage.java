@@ -11,10 +11,9 @@ public class AdministrationPage extends HeaderBar {
     private static final String ENDPOINT = "/admin/projects/overview";
     private static final By PAGE_OPENED_IDENTIFIER = By.xpath("//*[@id=\"content-header\"]/div/div[2]");
     private final By nameProjectField = By.xpath("//a[contains(text()," + project.getProjectName() + ")]");
-    private final By deleteProjectButton = By.className("icon-small-delete");
-    private final By editProjectButton = By.className("icon-small-edit");
+    private final By deleteProjectButton = By.xpath("//a[contains(text(),\" + project.getProjectName() + \")]//div");
     private final By deleteProjectCheckbox = By.name("deleteCheckbox");
-    private final By deleteOkButton = By.xpath("//a[contains(text(),\" + project.getProjectName() + \")]//div");
+    private final By deleteOkButton = By.xpath("//*[@id=\"deleteDialog\"]/div[3]/a[1]");
 
     public AdministrationPage(WebDriver driver) {
         super(driver);
@@ -26,10 +25,6 @@ public class AdministrationPage extends HeaderBar {
 
     public WebElement DeleteProjectButton() {
         return driver.findElement(deleteProjectButton);
-    }
-
-    public WebElement EditProjectButton() {
-        return driver.findElement(editProjectButton);
     }
 
     public WebElement DeleteProjectCheckbox() {

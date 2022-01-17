@@ -30,6 +30,7 @@ public class HeaderBar extends BasePage {
     private final By linkTwitter = By.className("icon-header-twitter");
     private final By linkBlog = By.className("icon-header-blog");
 
+
     public HeaderBar(WebDriver driver) {
         super(driver);
     }

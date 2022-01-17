@@ -5,6 +5,7 @@ public class Project {
     private String projectAnnouncement;
     private String projectType;
     private boolean showAnnouncement;
+    private boolean isCompleted;
 
 
     public Project() {
@@ -43,6 +44,15 @@ public class Project {
 
     public Project setShowAnnouncement(boolean showAnnouncement) {
         this.showAnnouncement = showAnnouncement;
+        return this;
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public Project setCompleted(boolean completed) {
+        this.isCompleted = completed;
         return this;
     }
 }
