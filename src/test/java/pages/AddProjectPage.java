@@ -1,24 +1,29 @@
 package pages;
 
 import core.ReadProperties;
+import models.Project;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pagebars.HeaderBar;
 
+import java.util.Arrays;
+import java.util.Random;
+
 public class AddProjectPage extends HeaderBar {
-    private static String ENDPOINT = "/dashboard";
+    private static final String ENDPOINT = "/admin/projects/add/1";
     private static final By PAGE_OPENED_IDENTIFIER = By.id("accept");
     private final By projectsSettings = By.id("projects-tabs-project");
     private final By prjNameField = By.id("name");
     private final By prjAnnouncementField = By.id("announcement");
-    private final By prjShowAnnouncement = By.id("show_announcement");
-    private final By prjSuiteModeSingle = By.id("suite_mode_single");
-    private final By prjSuiteModeSingleBaseline = By.id("suite_mode_single_baseline");
-    private final By prjSuiteModeMulti = By.id("suite_mode_multi");
+    private final By prjShowAnnouncementCheckbox = By.id("show_announcement");
+    private final By prjSuiteModeSingleCheckbox = By.id("suite_mode_single");
+    private final By prjSuiteModeSingleBaselineCheckbox = By.id("suite_mode_single_baseline");
+    private final By prjSuiteModeMultiCheckbox = By.id("suite_mode_multi");
     private final By accessSettings = By.id("projects-tabs-access");
-    private final By addProjectBtn = By.id("accept");
-    private final By cancelBtn =By.xpath("//a[contains(text(),'Cancel')][1]");
+    private final By addProjectButton = By.id("accept");
+    private final By cancelButton = By.xpath("//a[contains(text(),'Cancel')][1]");
 
     public AddProjectPage(WebDriver driver) {
         super(driver);
@@ -39,52 +44,80 @@ public class AddProjectPage extends HeaderBar {
         }
     }
 
-    public WebElement getProjectsSettings() {
+    public WebElement ProjectsSettings() {
         return driver.findElement(projectsSettings);
     }
 
-    public WebElement getPrjNameField() {
+    public WebElement PrjNameField() {
         return driver.findElement(prjNameField);
     }
 
-    public WebElement getPrjAnnouncementField() {
+    public WebElement PrjAnnouncementField() {
         return driver.findElement(prjAnnouncementField);
     }
 
-    public WebElement getPrjShowAnnouncement() {
-        return driver.findElement(prjShowAnnouncement);
+    public WebElement PrjShowAnnouncementCheckbox() {
+        return driver.findElement(prjShowAnnouncementCheckbox);
     }
 
-    public WebElement getPrjSuiteModeSingle() {
-        return driver.findElement(prjSuiteModeSingle);
+    public WebElement PrjSuiteModeSingleCheckbox() {
+        return driver.findElement(prjSuiteModeSingleCheckbox);
     }
 
-    public WebElement getPrjSuiteModeSingleBaseline() {
-        return driver.findElement(prjSuiteModeSingleBaseline);
+    public WebElement PrjSuiteModeSingleBaselineCheckbox() {
+        return driver.findElement(prjSuiteModeSingleBaselineCheckbox);
     }
 
-    public WebElement getPrjSuiteModeMulti() {
-        return driver.findElement(prjSuiteModeMulti);
+    public WebElement PrjSuiteModeMultiCheckbox() {
+        return driver.findElement(prjSuiteModeMultiCheckbox);
     }
 
-    public WebElement getAccessSettings() {
+    public WebElement AccessSettings() {
         return driver.findElement(accessSettings);
     }
 
-    public WebElement getAddProjectBtn() {
-        return driver.findElement(addProjectBtn);
+    public WebElement AddProjectButton() {
+        return driver.findElement(addProjectButton);
     }
 
-    public WebElement getCancelBtn() {
-        return driver.findElement(cancelBtn);
+    public WebElement CancelButton() {
+        return driver.findElement(cancelButton);
     }
 
 
-    public void add_project(){
-        getPrjNameField().sendKeys(ReadProperties.getProjectName());
-        getPrjAnnouncementField().sendKeys(ReadProperties.getProjectAnnouncement());
-        getPrjSuiteModeSingle().click();
-        getAddProjectBtn().click();
+    public Project getProject() {
+        return new Project()
+                .setProjectName(ReadProperties.getProjectName())
+                .setProjectAnnouncement(ReadProperties.getProjectAnnouncement())
+                .setProjectType(ReadProperties.getProjectType())
+                .setShowAnnouncement(ReadProperties.showAnnouncement());
+    }
+
+    public Project getRandomProject() {
+        Random random = new Random();
+        var list = Arrays.asList("suite_mode_single_baseline", "suite_mode_single", "suite_mode_multi");
+        var randomElement = list.get(random.nextInt(list.size()));
+        return new Project()
+                .setProjectName(RandomStringUtils.randomAlphanumeric(5))
+                .setProjectAnnouncement(RandomStringUtils.randomAlphanumeric(5))
+                .setProjectType(randomElement)
+                .setShowAnnouncement(random.nextBoolean());
+    }
+
+
+    public void add_project(Project project) {
+        PrjNameField().sendKeys(project.getProjectName());
+        PrjAnnouncementField().sendKeys(project.getProjectAnnouncement());
+        if (project.isShowAnnouncement()) {
+            PrjShowAnnouncementCheckbox().click();
+        }
+        switch (project.getProjectType()) {
+            case "suite_mode_single" -> PrjSuiteModeSingleCheckbox().click();
+            case "suite_mode_single_baseline" -> PrjSuiteModeSingleBaselineCheckbox().click();
+            case "suite_mode_multi" -> PrjSuiteModeMultiCheckbox().click();
+            default -> throw new IllegalStateException("Unexpected value: " + project.getProjectType());
+        }
+        AddProjectButton().click();
     }
 
 

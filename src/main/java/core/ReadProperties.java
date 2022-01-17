@@ -19,6 +19,7 @@ public class ReadProperties {
     public static String getUrl() {
         return properties.getProperty("url");
     }
+
     public static String getProjectAnnouncement() {
         return properties.getProperty("ProjectAnnouncement");
     }
@@ -26,10 +27,10 @@ public class ReadProperties {
     public static String getBrowserName() {
         return properties.getProperty("browserType");
     }
+
     public static String getProjectName() {
         return properties.getProperty("ProjectName");
     }
-
 
     public static String getUsername() {
         return properties.getProperty("username");
@@ -38,12 +39,20 @@ public class ReadProperties {
     public static String getPassword() {
         return properties.getProperty("password");
     }
+    public static String getProjectType() {
+        return properties.getProperty("ProjectType");
+    }
 
     public static boolean isHeadless() {
         return properties.getProperty("headless").equalsIgnoreCase("true");
     }
 
+    public static boolean showAnnouncement() {
+        return properties.getProperty("showAnnouncement").equalsIgnoreCase("true");
+    }
+
     public static int getTimeOut() {
         return Integer.parseInt(properties.getProperty("timeout"));
     }
+
 }

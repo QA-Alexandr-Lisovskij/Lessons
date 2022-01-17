@@ -10,7 +10,7 @@ import utils.Listener;
 import utils.Waits;
 
 
-   @Listeners(Listener.class)
+    @Listeners(Listener.class)
     public class BaseTest {
     protected WebDriver driver;
     protected BrowsersService browsersService;

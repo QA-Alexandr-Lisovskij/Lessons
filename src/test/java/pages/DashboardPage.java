@@ -7,11 +7,11 @@ import pagebars.HeaderBar;
 
 
 public class DashboardPage extends HeaderBar {
-    private static String ENDPOINT = "/dashboard";
+    private static final String ENDPOINT = "/dashboard";
     private static final By PAGE_OPENED_IDENTIFIER = By.xpath("//div[contains(text(),'All Projects')]");
-    private final By addProjectBtn = By.id("navigation-empty-addproject");
-    private final By addProjectBtnSidebar = By.id("sidebar-projects-add");
-    private final By addExampleProjectBtn = By.id("navigation-empty-addexampleproject");
+    private final By addProjectButton = By.id("navigation-empty-addproject");
+    private final By addProjectButtonSidebar = By.id("sidebar-projects-add");
+    private final By addExampleProjectButton = By.id("navigation-empty-addexampleproject");
     private final By displayDetailView = By.className("icon-display-large");
     private final By displayCompactView = By.className("icon-display-small-inactive");
     private final By navigationProjectName = By.id("navigation-project");
@@ -34,27 +34,27 @@ public class DashboardPage extends HeaderBar {
         driver.get(BASE_URL + ENDPOINT);
     }
 
-    public WebElement getAddProjectBtn() {
-        return driver.findElement(addProjectBtn);
+    public WebElement AddProjectButton() {
+        return driver.findElement(addProjectButton);
     }
 
-    public WebElement getAddProjectBtnSidebar() {
-        return driver.findElement(addProjectBtnSidebar);
+    public WebElement AddProjectButtonSidebar() {
+        return driver.findElement(addProjectButtonSidebar);
     }
 
-    public WebElement getAddExampleProjectBtn() {
-        return driver.findElement(addExampleProjectBtn);
+    public WebElement AddExampleProjectButton() {
+        return driver.findElement(addExampleProjectButton);
     }
 
-    public WebElement getDisplayDetailView() {
+    public WebElement DisplayDetailView() {
         return driver.findElement(displayDetailView);
     }
 
-    public WebElement getDisplayCompactView() {
+    public WebElement DisplayCompactView() {
         return driver.findElement(displayCompactView);
     }
 
-    public WebElement getNavigationProjectName() {
+    public WebElement NavigationProjectName() {
         return driver.findElement(navigationProjectName);
     }
 

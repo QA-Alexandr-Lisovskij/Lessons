@@ -1,19 +1,20 @@
 package pages;
 
 import baseEntities.BasePage;
+import core.ReadProperties;
 import models.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class LoginPage extends BasePage {
-    private static String ENDPOINT = "/auth/login";
+    private static final String ENDPOINT = "/auth/login";
     private static final By PAGE_OPENED_IDENTIFIER = By.className("logo-loginpage");
-    private final By emailfield = By.id("name");
-    private final By passwordfield = By.id("password");
-    private final By keeploggedin = By.className("loginpage-checkmark");
-    private final By loginbtn = By.id("button_primary");
-    private final By forgotpassword = By.className("'loginpage-forgotpassword");
+    private final By emailField = By.id("name");
+    private final By passwordField = By.id("password");
+    private final By keepLoggedInCheckbox = By.className("loginpage-checkmark");
+    private final By loginButton = By.id("button_primary");
+    private final By forgotPasswordCheckbox = By.className("'loginpage-forgotpassword");
 
     public LoginPage(WebDriver driver){
         super(driver);
@@ -21,24 +22,24 @@ public class LoginPage extends BasePage {
 
 
 
-    public WebElement getEmailfield() {
-        return driver.findElement(emailfield);
+    public WebElement Emailfield() {
+        return driver.findElement(emailField);
     }
 
-    public WebElement getPasswordfield() {
-        return driver.findElement(passwordfield);
+    public WebElement Passwordfield() {
+        return driver.findElement(passwordField);
     }
 
-    public WebElement getLoginbtn() {
-        return driver.findElement(loginbtn);
+    public WebElement LoginButton() {
+        return driver.findElement(loginButton);
     }
 
-    public WebElement keeploggedin() {
-        return driver.findElement(keeploggedin);
+    public WebElement KeeploggedinCheckbox() {
+        return driver.findElement(keepLoggedInCheckbox);
     }
 
-    public WebElement getForgotpassword() {
-        return driver.findElement(forgotpassword);
+    public WebElement ForgotpasswordCheckbox() {
+        return driver.findElement(forgotPasswordCheckbox);
     }
 
     @Override
@@ -55,9 +56,15 @@ public class LoginPage extends BasePage {
         driver.get(BASE_URL + ENDPOINT);
     }
 
+    public User getUser(){
+        return new User()
+                .setEmail(ReadProperties.getUsername())
+                .setPassword(ReadProperties.getPassword());
+    }
+
     public void login(User user) {
-        getEmailfield().sendKeys(user.getEmail());
-        getPasswordfield().sendKeys(user.getPassword());
-        getLoginbtn().click();
+        Emailfield().sendKeys(user.getEmail());
+        Passwordfield().sendKeys(user.getPassword());
+        LoginButton().click();
     }
 }

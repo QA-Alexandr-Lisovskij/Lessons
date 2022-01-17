@@ -18,7 +18,7 @@ public class HeaderBar extends BasePage {
     private final By helpDropdown = By.id("navigation-menu");
     private final By helpLinkUserGuide = By.xpath("//a[contains(text(),'TestRail User Guide')]");
     private final By helpLinkSupportAndVideos = By.xpath("//a[contains(text(),'Support & Videos')]");
-    private final By helpLinkCommunityForum  = By.xpath("//a[contains(text(),'Community Forum ')]");
+    private final By helpLinkCommunityForum = By.xpath("//a[contains(text(),'Community Forum ')]");
     private final By helpLinkKeyboardShortcuts = By.xpath("//a[contains(text(),'Keyboard Shortcuts')]");
     private final By helpLinkGurockBlog = By.xpath("//a[contains(text(),'Gurock Blog')]");
     private final By helpLinkTwitter = By.xpath("//a[contains(text(),'TestRail on Twitter')]");
@@ -48,94 +48,93 @@ public class HeaderBar extends BasePage {
         }
     }
 
-    public WebElement getBannerLink() {
+    public WebElement BannerLink() {
         return driver.findElement(bannerLink);
     }
 
-    public WebElement getDashboard() {
+    public WebElement Dashboard() {
         return driver.findElement(dashboard);
     }
 
-    public WebElement getAdministration() {
+    public WebElement Administration() {
         return driver.findElement(аdministration);
     }
 
-    public WebElement getWorkDropdown() {
+    public WebElement WorkDropdown() {
         return driver.findElement(workDropdown);
     }
 
-    public WebElement getWorkStatus() {
+    public WebElement WorkStatus() {
         return driver.findElement(workStatus);
     }
 
-    public WebElement getUserDropdown() {
+    public WebElement UserDropdown() {
         return driver.findElement(userDropdown);
     }
 
-    public WebElement getUserSettings() {
+    public WebElement UserSettings() {
         return driver.findElement(userSettings);
     }
 
-    public WebElement getUserLogout() {
+    public WebElement UserLogout() {
         return driver.findElement(userLogout);
     }
 
-    public WebElement getHelpDropdown() {
+    public WebElement HelpDropdown() {
         return driver.findElement(helpDropdown);
     }
 
-    public WebElement getHelpLinkUserGuide() {
+    public WebElement HelpLinkUserGuide() {
         return driver.findElement(helpLinkUserGuide);
     }
 
-    public WebElement getHelpLinkSupportAndVideos() {
+    public WebElement HelpLinkSupportAndVideos() {
         return driver.findElement(helpLinkSupportAndVideos);
     }
 
-    public WebElement getHelpLinkCommunityForum() {
+    public WebElement HelpLinkCommunityForum() {
         return driver.findElement(helpLinkCommunityForum);
     }
 
-    public WebElement getHelpLinkKeyboardShortcuts() {
+    public WebElement HelpLinkKeyboardShortcuts() {
         return driver.findElement(helpLinkKeyboardShortcuts);
     }
 
-    public WebElement getHelpLinkGurockBlog() {
+    public WebElement HelpLinkGurockBlog() {
         return driver.findElement(helpLinkGurockBlog);
     }
 
-    public WebElement getHelpLinkTwitter() {
+    public WebElement HelpLinkTwitter() {
         return driver.findElement(helpLinkTwitter);
     }
 
-    public WebElement getHelpLinkWeb() {
+    public WebElement HelpLinkWeb() {
         return driver.findElement(helpLinkWeb);
     }
 
-    public WebElement getHelpLinkNewsletter() {
+    public WebElement HelpLinkNewsletter() {
         return driver.findElement(helpLinkNewsletter);
     }
 
-    public WebElement getHelpSurvey() {
+    public WebElement HelpSurvey() {
         return driver.findElement(helpSurvey);
     }
 
-    public WebElement getHelpAboutTestRail() {
+    public WebElement HelpAboutTestRail() {
         return driver.findElement(helpAboutTestRail);
     }
 
-    public WebElement getLinkMail() {
+    public WebElement LinkMail() {
         return driver.findElement(linkMail);
     }
 
-    public WebElement getLinkTwitter() {
+    public WebElement LinkTwitter() {
         return driver.findElement(linkTwitter);
     }
 
-    public WebElement getLinkBlog() {
+    public WebElement LinkBlog() {
         return driver.findElement(linkBlog);
     }
-
 
 
 }

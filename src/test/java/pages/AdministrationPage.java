@@ -7,15 +7,36 @@ import org.openqa.selenium.WebElement;
 import pagebars.HeaderBar;
 
 public class AdministrationPage extends HeaderBar {
-    private static String ENDPOINT = "/dashboard";
-    private static final By PAGE_OPENED_IDENTIFIER = By.xpath("//div[contains(text(),'All Projects')]");
-    private final By prjsRequiredProject = By.xpath("//a[contains(text(),"+ ReadProperties.getProjectName()+")]");
+    private static final String ENDPOINT = "/admin/projects/overview";
+    private static final By PAGE_OPENED_IDENTIFIER = By.className("content-header-title page_title display-inline-block");
+    private final By nameProjectField = By.xpath("//a[contains(text()," + ReadProperties.getProjectName() + ")]");
+    private final By deleteProjectButton = By.className("icon-small-delete");
+    private final By editProjectButton = By.className("icon-small-edit");
+    private final By deleteProjectCheckbox = By.name("deleteCheckbox");
+    private final By deleteOkButton = By.className("button button-ok button-left button-positive dialog-action-default");
+
     public AdministrationPage(WebDriver driver) {
         super(driver);
     }
 
-    public WebElement getPrjsRequiredProject() {
-        return driver.findElement(prjsRequiredProject);
+    public WebElement NameProjectField() {
+        return driver.findElement(nameProjectField);
+    }
+
+    public WebElement DeleteProjectButton() {
+        return driver.findElement(deleteProjectButton);
+    }
+
+    public WebElement EditProjectButton() {
+        return driver.findElement(editProjectButton);
+    }
+
+    public WebElement DeleteProjectCheckbox() {
+        return driver.findElement(deleteProjectCheckbox);
+    }
+
+    public WebElement DeleteOkButton() {
+        return driver.findElement(deleteOkButton);
     }
 
     @Override
@@ -24,7 +45,7 @@ public class AdministrationPage extends HeaderBar {
     }
 
     @Override
-    public boolean isPageOpened(){
+    public boolean isPageOpened() {
         try {
             return waits.waitForVisibility(PAGE_OPENED_IDENTIFIER).isDisplayed();
         } catch (Exception ex) {
