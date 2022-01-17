@@ -1,10 +1,5 @@
 package models;
 
-import org.apache.commons.lang3.RandomStringUtils;
-
-import java.util.Arrays;
-import java.util.Random;
-
 public class Project {
     private String projectName;
     private String projectAnnouncement;
@@ -49,17 +44,6 @@ public class Project {
     public Project setShowAnnouncement(boolean showAnnouncement) {
         this.showAnnouncement = showAnnouncement;
         return this;
-    }
-
-    public Project getRandomProject() {
-        Random random = new Random();
-        var list = Arrays.asList("suite_mode_single_baseline", "suite_mode_single", "suite_mode_multi");
-        var randomElement = list.get(random.nextInt(list.size()));
-        return new Project()
-                .setProjectName(RandomStringUtils.randomAlphanumeric(5))
-                .setProjectAnnouncement(RandomStringUtils.randomAlphanumeric(5))
-                .setProjectType(randomElement)
-                .setShowAnnouncement(random.nextBoolean());
     }
 
 }
