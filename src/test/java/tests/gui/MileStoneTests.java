@@ -13,7 +13,7 @@ public class MileStoneTests extends BaseTest {
     public void test1(){
         Project project = new Project();
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login(loginPage.getUser());
+        //loginPage.login(loginPage.getUser());
         ProjectSteps projectSteps = new ProjectSteps(driver);
         projectSteps.addProject(project);
         MilestoneSteps milestoneSteps = new MilestoneSteps(driver);

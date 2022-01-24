@@ -12,7 +12,7 @@ public class SmokeTest extends BaseTest {
     @Test(priority = 1)
     public void addProjectTest() throws InterruptedException {
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login(loginPage.getUser());
+        //loginPage.login(loginPage.getUser());
         DashboardPage dashboardPage = new DashboardPage(driver);
         dashboardPage.addProject();
         AddProjectPage addProjectPage = new AddProjectPage(driver);
@@ -25,7 +25,7 @@ public class SmokeTest extends BaseTest {
     @Test(priority = 2)
     public void updateProjectTest() throws InterruptedException {
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login(loginPage.getUser());
+       //loginPage.login(loginPage.getUser());
         AdministrationPage administrationPage = new AdministrationPage(driver);
         administrationPage.Administration().click();
         administrationPage.NameProjectField().click();
