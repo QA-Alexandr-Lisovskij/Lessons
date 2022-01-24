@@ -1,0 +1,17 @@
+[{
+  "Project1" : {
+    "projectName": "Faust",
+    "projectAnnouncement": "Hi",
+    "projectType": "suite_mode_single_baseline",
+    "showAnnouncement": true,
+    "isCompleted": false
+  }},
+  {
+  "Project2" : {
+    "projectName" : "Shneider",
+    "projectAnnouncement" : "Hello",
+    "projectType" : "suite_mode_single",
+    "showAnnouncement" : false,
+    "isCompleted" : false
+  }}
+]
