@@ -1,7 +1,6 @@
 package pages;
 
 import baseEntities.BasePage;
-import core.ReadProperties;
 import models.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -56,11 +55,11 @@ public class LoginPage extends BasePage {
         driver.get(BASE_URL + ENDPOINT);
     }
 
-    public User getUser(){
-        return new User()
-                .setEmail(ReadProperties.getUsername())
-                .setPassword(ReadProperties.getPassword());
-    }
+    //public User getUser(){
+    //    return new User()
+    //            .setEmail(ReadProperties.getUsername())
+    //            .setPassword(ReadProperties.getPassword());
+   // }
 
     public void login(User user) {
         Emailfield().sendKeys(user.getEmail());
