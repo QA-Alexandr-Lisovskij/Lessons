@@ -13,7 +13,7 @@ import utils.Waits;
     @Listeners(Listener.class)
     public class BaseTest {
     protected WebDriver driver;
-    protected BrowsersService browsersService;
+    public BrowsersService browsersService;
     protected Waits waits;
 
     @BeforeClass
