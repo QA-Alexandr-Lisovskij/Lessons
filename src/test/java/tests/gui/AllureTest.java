@@ -15,7 +15,7 @@ public class AllureTest {
     }
 
     @Test
-    @Description("descamble-readable test name")
+    @Description("descamble test name")
     public void testDescription(){
         Assert.assertTrue(true);
     }
