@@ -128,7 +128,7 @@ public class TestRailApiTest1 extends BaseApiTest {
        Assert.assertEquals(response.getBody().jsonPath().get("name"),projectupd.getName());
     }
 
-    @Test(dependsOnMethods = "addProject4")
+    @Test(dependsOnMethods = "updateProject")
     public void deleteProject(){
         String endpoint = "index.php?/api/v2/delete_project/{project_id}";
 
