@@ -1,15 +1,10 @@
 package pages;
 
-import core.ReadProperties;
 import models.Project;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pagebars.HeaderBar;
-
-import java.util.Arrays;
-import java.util.Random;
 
 public class AddProjectPage extends HeaderBar {
     private static final String ENDPOINT = "/admin/projects/add/1";
@@ -83,27 +78,6 @@ public class AddProjectPage extends HeaderBar {
     public WebElement CancelButton() {
         return driver.findElement(cancelButton);
     }
-
-
-    public Project getProject() {
-        return new Project()
-                .setProjectName(ReadProperties.getProjectName())
-                .setProjectAnnouncement(ReadProperties.getProjectAnnouncement())
-                .setProjectType(ReadProperties.getProjectType())
-                .setShowAnnouncement(ReadProperties.showAnnouncement());
-    }
-
-    public Project getRandomProject() {
-        Random random = new Random();
-        var list = Arrays.asList("suite_mode_single_baseline", "suite_mode_single", "suite_mode_multi");
-        var randomElement = list.get(random.nextInt(list.size()));
-        return new Project()
-                .setProjectName(RandomStringUtils.randomAlphanumeric(5))
-                .setProjectAnnouncement(RandomStringUtils.randomAlphanumeric(5))
-                .setProjectType(randomElement)
-                .setShowAnnouncement(random.nextBoolean());
-    }
-
 
     public void add_project(Project project) {
         PrjNameField().sendKeys(project.getProjectName());

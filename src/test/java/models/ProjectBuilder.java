@@ -10,6 +10,4 @@ public class ProjectBuilder {
     private String projectType;
     private boolean showAnnouncement;
     private boolean isCompleted;
-
-
 }

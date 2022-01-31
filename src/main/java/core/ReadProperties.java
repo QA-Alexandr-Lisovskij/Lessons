@@ -32,7 +32,7 @@ public class ReadProperties {
         return properties.getProperty("ProjectName");
     }
 
-    public static String getUsername() {
+    public static String getEmail() {
         return properties.getProperty("username");
     }
 

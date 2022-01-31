@@ -1,7 +1,7 @@
 package steps;
 
 import baseEntities.BaseStep;
-import models.Milestone;
+import models.MilestoneBuilder;
 import models.Project;
 import org.openqa.selenium.WebDriver;
 
@@ -15,11 +15,11 @@ public class MilestoneSteps extends BaseStep {
 
     }
 
-    public void updateMilestone(Project project,Milestone currentMilestone, Milestone newMilestone){
+    public void updateMilestone(Project project, MilestoneBuilder currentMilestoneBuilder, MilestoneBuilder newMilestoneBuilder){
 
     }
 
-    public void deleteMilestone(Project project,Milestone milestone){
+    public void deleteMilestone(Project project, MilestoneBuilder milestoneBuilder){
 
     }
 }

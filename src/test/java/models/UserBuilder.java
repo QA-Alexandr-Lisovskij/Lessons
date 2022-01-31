@@ -8,7 +8,7 @@ import lombok.ToString;
 @Data
 @Builder
 @ToString(exclude = "email")
-public class User {
+public class UserBuilder {
     private String name;
     private String email;
     private String password;
@@ -17,4 +17,5 @@ public class User {
     @SerializedName(value = "role_id")
     private int roleId;
     private String role;
+
 }

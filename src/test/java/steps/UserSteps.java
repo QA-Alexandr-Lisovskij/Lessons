@@ -1,7 +1,7 @@
 package steps;
 
 import baseEntities.BaseStep;
-import models.User;
+import models.UserBuilder;
 import org.openqa.selenium.WebDriver;
 
 public class UserSteps extends BaseStep {
@@ -9,7 +9,7 @@ public class UserSteps extends BaseStep {
         super(driver);
     }
 
-    public void login(User user){
+    public void login(UserBuilder userBuilder){
 
     }
 
