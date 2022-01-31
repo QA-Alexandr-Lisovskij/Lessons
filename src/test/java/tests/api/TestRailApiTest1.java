@@ -1,9 +1,10 @@
 package tests.api;
 
-import baseEntities.BaseApiTest;
+import baseEntity.BaseApiTest;
+import enums.ProjectType;
 import io.restassured.mapper.ObjectMapperType;
 import io.restassured.response.Response;
-import models.ProjectBuilder;
+import models.Project;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -13,13 +14,11 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
-
 public class TestRailApiTest1 extends BaseApiTest {
     int projectID;
 
     @Test
-    public void getAllProjects(){
-
+    public void getAllProjects() {
         String endpoint = "/index.php?/api/v2/get_projects";
 
         given()
@@ -30,45 +29,27 @@ public class TestRailApiTest1 extends BaseApiTest {
     }
 
     @Test
-    public void addProject1(){
+    public void addProject1() {
         String endpoint = "/index.php?/api/v2/add_project";
 
-        ProjectBuilder project = ProjectBuilder.builder()
-                        .name("FIFO")
-                        .projectAnnouncement("This is the description for the project")
-                                .showAnnouncement(true)
-                                        .build();
-
+        Project project = Project.builder()
+                .name("WP_Project_01")
+                .announcement("This is the description for the project")
+                .isShowAnnouncement(true)
+                .typeOfProject(ProjectType.SINGLE_SUITE_MODE)
+                .build();
 
         given()
                 .body(String.format("{\n" +
-                        "  \"name\" : \"%s\",\n" +
-                        "  \"announcement\" : \"%s\",\n" +
-                        "  \"show_announcement\": %b,\n" +
-                        "  \"suite_mode\" : %d\n" +
-                        "}",
+                                "  \"name\": \"%s\",\n" +
+                                "  \"announcement\": \"%s\",\n" +
+                                "  \"show_announcement\": %b,\n" +
+                                "  \"suite_mode\" : %d\n" +
+                                "}",
                         project.getName(),
-                        project.getProjectAnnouncement(),
+                        project.getAnnouncement(),
                         project.isShowAnnouncement(),
-                        3))
-                .when()
-                .post(endpoint)
-                .then().log().body()
-                .statusCode(HttpStatus.SC_OK);
-    }
-    @Test
-    public void addProject2(){
-        String endpoint = "/index.php?/api/v2/add_project";
-
-        ProjectBuilder project = ProjectBuilder.builder()
-                .name("FIFOs")
-                .showAnnouncement(false)
-                .build();
-        Map<String,Object> jsonAsMap = new HashMap<>();
-        jsonAsMap.put("name",project.getName());
-        jsonAsMap.put("showAnnouncement", project.isShowAnnouncement());
-        given()
-         .body(jsonAsMap)
+                        project.getTypeOfProject()))
                 .when()
                 .post(endpoint)
                 .then().log().body()
@@ -76,15 +57,39 @@ public class TestRailApiTest1 extends BaseApiTest {
     }
 
     @Test
-    public void addProject3(){
+    public void addProject2() {
         String endpoint = "/index.php?/api/v2/add_project";
 
-        ProjectBuilder project = ProjectBuilder.builder()
-                .name("FIFOsu")
+        Project project = Project.builder()
+                .name("WP_Project_02")
+                .typeOfProject(ProjectType.SINGLE_SUITE_MODE)
                 .build();
 
+        Map<String, Object> jsonAsMap = new HashMap<>();
+        jsonAsMap.put("name", project.getName());
+        jsonAsMap.put("suite_mode", project.getTypeOfProject());
+
         given()
-         .body(project, ObjectMapperType.GSON)
+                .body(jsonAsMap)
+                .when()
+                .post(endpoint)
+                .then()
+                .log().body()
+                .statusCode(HttpStatus.SC_OK);
+    }
+
+    @Test
+    public void addProject3() {
+        String endpoint = "/index.php?/api/v2/add_project";
+
+        Project project = Project.builder()
+                .name("WP_Project_03")
+                .typeOfProject(ProjectType.SINGLE_SUITE_BASELINES)
+                .build();
+
+        given()
+                .body(project, ObjectMapperType.GSON)
+                .log().body()
                 .when()
                 .post(endpoint)
                 .then().log().body()
@@ -92,44 +97,52 @@ public class TestRailApiTest1 extends BaseApiTest {
     }
 
     @Test
-    public void addProject4(){
+    public void addProject4() {
         String endpoint = "/index.php?/api/v2/add_project";
 
-        ProjectBuilder project = ProjectBuilder.builder()
-                .name("FIFOsu")
+        Project project = Project.builder()
+                .name("WP_Project_04")
+                .typeOfProject(ProjectType.SINGLE_SUITE_BASELINES)
                 .build();
 
         projectID = given()
-         .body(project, ObjectMapperType.GSON)
+                .body(project, ObjectMapperType.GSON)
+                .log().body()
                 .when()
                 .post(endpoint)
-                .then().log().body()
+                .then()
+                .log().body()
                 .statusCode(HttpStatus.SC_OK)
                 .extract().jsonPath().get("id");
+
         System.out.println(projectID);
     }
-@Test(dependsOnMethods = "addProject4")
-    public void updateProject(){
+
+    @Test(dependsOnMethods = "addProject4")
+    public void updateProject() {
         String endpoint = "/index.php?/api/v2/update_project/{project_id}";
 
-        ProjectBuilder projectupd = ProjectBuilder.builder()
-                .name("FIFOsu_upd")
+        Project projectUpd = Project.builder()
+                .name("WP_Project_04_UPD")
+                .announcement("Test!!!")
+                .isCompleted(true)
                 .build();
 
-       Response response =  given()
-                .pathParam("project_id",projectID)
-                .body(projectupd, ObjectMapperType.GSON)
+        Response response = given()
+                .pathParam("project_id", projectID)
+                .body(projectUpd, ObjectMapperType.GSON)
                 .when()
                 .post(endpoint)
                 .then()
                 .log().body()
                 .extract().response();
 
-       Assert.assertEquals(response.getBody().jsonPath().get("name"),projectupd.getName());
+        Assert.assertEquals(response.getBody().jsonPath().get("name"),
+                projectUpd.getName());
     }
 
-    @Test(dependsOnMethods = "addProject4")
-    public void deleteProject(){
+    @Test(dependsOnMethods = "updateProject")
+    public void deleteProject() {
         String endpoint = "index.php?/api/v2/delete_project/{project_id}";
 
         given()
@@ -140,5 +153,4 @@ public class TestRailApiTest1 extends BaseApiTest {
                 .log().body()
                 .statusCode(HttpStatus.SC_OK);
     }
-
 }

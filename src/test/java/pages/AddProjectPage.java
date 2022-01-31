@@ -1,32 +1,21 @@
 package pages;
 
-import core.ReadProperties;
-import models.Project;
-import org.apache.commons.lang3.RandomStringUtils;
+import baseEntity.BasePage;
+import enums.ProjectType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import pagebars.HeaderBar;
 
-import java.util.Arrays;
-import java.util.Random;
-
-public class AddProjectPage extends HeaderBar {
-    private static final String ENDPOINT = "/admin/projects/add/1";
-    private static final By PAGE_OPENED_IDENTIFIER = By.id("accept");
-    private final By projectsSettings = By.id("projects-tabs-project");
-    private final By prjNameField = By.id("name");
-    private final By prjAnnouncementField = By.id("announcement");
-    private final By prjShowAnnouncementCheckbox = By.id("show_announcement");
-    private final By prjSuiteModeSingleCheckbox = By.id("suite_mode_single");
-    private final By prjSuiteModeSingleBaselineCheckbox = By.id("suite_mode_single_baseline");
-    private final By prjSuiteModeMultiCheckbox = By.id("suite_mode_multi");
-    private final By accessSettings = By.id("projects-tabs-access");
-    private final By acceptButton = By.id("accept");
-    private final By cancelButton = By.xpath("//a[contains(text(),'Cancel')][1]");
+public class AddProjectPage extends BasePage {
+    private static final By PAGE_OPENED_IDENTIFIER = By.id("activityChart");
+    private static String ENDPOINT = "/index.php?/dashboard";
+    private static String typeRadioButtonSelector = "//*[@name = 'suite_mode' and @value='replace']";
 
     public AddProjectPage(WebDriver driver) {
         super(driver);
+    }
+
+    public AddProjectPage(WebDriver driver, boolean openPageByUrl) {
+        super(driver, openPageByUrl);
     }
 
     @Override
@@ -35,91 +24,11 @@ public class AddProjectPage extends HeaderBar {
     }
 
     @Override
-    public boolean isPageOpened() {
-        try {
-            return waits.waitForVisibility(PAGE_OPENED_IDENTIFIER).isDisplayed();
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            return false;
-        }
+    protected boolean isPageOpened() {
+        return waits.waitForVisibility(PAGE_OPENED_IDENTIFIER).isDisplayed();
     }
 
-    public WebElement ProjectsSettings() {
-        return driver.findElement(projectsSettings);
+    public void setType(ProjectType type) {
+        driver.findElement(By.xpath(typeRadioButtonSelector.replace("replace", String.valueOf(type))));
     }
-
-    public WebElement PrjNameField() {
-        return driver.findElement(prjNameField);
-    }
-
-    public WebElement PrjAnnouncementField() {
-        return driver.findElement(prjAnnouncementField);
-    }
-
-    public WebElement PrjShowAnnouncementCheckbox() {
-        return driver.findElement(prjShowAnnouncementCheckbox);
-    }
-
-    public WebElement PrjSuiteModeSingleCheckbox() {
-        return driver.findElement(prjSuiteModeSingleCheckbox);
-    }
-
-    public WebElement PrjSuiteModeSingleBaselineCheckbox() {
-        return driver.findElement(prjSuiteModeSingleBaselineCheckbox);
-    }
-
-    public WebElement PrjSuiteModeMultiCheckbox() {
-        return driver.findElement(prjSuiteModeMultiCheckbox);
-    }
-
-    public WebElement AccessSettings() {
-        return driver.findElement(accessSettings);
-    }
-
-    public WebElement AcceptButton() {
-        return driver.findElement(acceptButton);
-    }
-
-    public WebElement CancelButton() {
-        return driver.findElement(cancelButton);
-    }
-
-
-    public Project getProject() {
-        return new Project()
-                .setProjectName(ReadProperties.getProjectName())
-                .setProjectAnnouncement(ReadProperties.getProjectAnnouncement())
-                .setProjectType(ReadProperties.getProjectType())
-                .setShowAnnouncement(ReadProperties.showAnnouncement());
-    }
-
-    public Project getRandomProject() {
-        Random random = new Random();
-        var list = Arrays.asList("suite_mode_single_baseline", "suite_mode_single", "suite_mode_multi");
-        var randomElement = list.get(random.nextInt(list.size()));
-        return new Project()
-                .setProjectName(RandomStringUtils.randomAlphanumeric(5))
-                .setProjectAnnouncement(RandomStringUtils.randomAlphanumeric(5))
-                .setProjectType(randomElement)
-                .setShowAnnouncement(random.nextBoolean());
-    }
-
-
-    public void add_project(Project project) {
-        PrjNameField().sendKeys(project.getProjectName());
-        PrjAnnouncementField().sendKeys(project.getProjectAnnouncement());
-        if (project.isShowAnnouncement()) {
-            PrjShowAnnouncementCheckbox().click();
-        }
-        switch (project.getProjectType()) {
-            case "suite_mode_single" -> PrjSuiteModeSingleCheckbox().click();
-            case "suite_mode_single_baseline" -> PrjSuiteModeSingleBaselineCheckbox().click();
-            case "suite_mode_multi" -> PrjSuiteModeMultiCheckbox().click();
-            default -> throw new IllegalStateException("Unexpected value: " + project.getProjectType());
-        }
-        AcceptButton().click();
-    }
-
-
 }
-
