@@ -85,24 +85,7 @@ public class AddProjectPage extends HeaderBar {
     }
 
 
-    public Project getProject() {
-        return new Project()
-                .setProjectName(ReadProperties.getProjectName())
-                .setProjectAnnouncement(ReadProperties.getProjectAnnouncement())
-                .setProjectType(ReadProperties.getProjectType())
-                .setShowAnnouncement(ReadProperties.showAnnouncement());
-    }
 
-    public Project getRandomProject() {
-        Random random = new Random();
-        var list = Arrays.asList("suite_mode_single_baseline", "suite_mode_single", "suite_mode_multi");
-        var randomElement = list.get(random.nextInt(list.size()));
-        return new Project()
-                .setProjectName(RandomStringUtils.randomAlphanumeric(5))
-                .setProjectAnnouncement(RandomStringUtils.randomAlphanumeric(5))
-                .setProjectType(randomElement)
-                .setShowAnnouncement(random.nextBoolean());
-    }
 
 
     public void add_project(Project project) {

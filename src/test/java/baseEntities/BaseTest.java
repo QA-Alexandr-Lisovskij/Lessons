@@ -2,6 +2,7 @@ package baseEntities;
 
 import core.BrowsersService;
 import core.ReadProperties;
+import models.Project;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -15,6 +16,7 @@ import utils.Waits;
     protected WebDriver driver;
     public BrowsersService browsersService;
     protected Waits waits;
+    protected Project project = new Project();
 
     @BeforeClass
     public void openPage() {
