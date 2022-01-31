@@ -1,9 +1,11 @@
 package tests.gui;
 
 import baseEntities.BaseTest;
+import models.Project;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.*;
+import steps.ProjectSteps;
 
 
 public class SmokeTest extends BaseTest {
@@ -32,5 +34,12 @@ public class SmokeTest extends BaseTest {
         EditProjectPage editProjectPage = new EditProjectPage(driver);
         editProjectPage.edit_project(editProjectPage.getRandomProject());
         Assert.assertTrue(waits.waitForVisibility(administrationPage.NameProjectField()));
+    }
+
+    @Test
+    public void stepTest(){
+        ProjectSteps projectSteps = new ProjectSteps(driver);
+        projectSteps.addProject(Project);
+        Assert.assertTrue(true);
     }
 }
