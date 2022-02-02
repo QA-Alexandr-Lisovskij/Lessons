@@ -21,5 +21,6 @@ public class LoggerTest {
     public void loginTest(){
         logger.trace("login test is started... ");
         logger.trace("initialization start variables...");
+
     }
 }
