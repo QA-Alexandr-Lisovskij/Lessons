@@ -4,23 +4,25 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.Lessons</groupId>
-    <artifactId>Lessons</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <groupId>org.tms</groupId>
+    <artifactId>TMS_Lessons</artifactId>
+    <version>1.0</version>
     <name>TMS_Lessons</name>
 
     <properties>
+        <my.property>sdfsdf</my.property>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
         <aspectj.version>1.9.6</aspectj.version>
         <allure.version>2.13.7</allure.version>
+        <selenium.java>3.141.59</selenium.java>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>3.141.59</version>
+            <version>${selenium.java}</version>
         </dependency>
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
@@ -52,31 +54,6 @@
             <artifactId>allure-testng</artifactId>
             <version>2.17.2</version>
         </dependency>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.2.5</version>
-        </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java</artifactId>
-            <version>7.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-testng</artifactId>
-            <version>7.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-picocontainer</artifactId>
-            <version>6.5.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>${aspectj.version}</version>
-        </dependency>
     </dependencies>
 
     <build>
@@ -92,7 +69,7 @@
                     <forkCount>2</forkCount>
                     <reuseForks>true</reuseForks>
                     <useSystemClassLoader>false</useSystemClassLoader>
-                    <!--suiteXmlFiles>src/test/resources/testng.xml</suiteXmlFiles-->
+                    <!--suiteXmlFiles>${suiteXmlFile}</suiteXmlFiles-->
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
